@@ -23,12 +23,6 @@ public class SpringDemoJpaApplication {
 		
 		
 		return args -> {
-
-
-			Team team = new Team();
-			team.setId("TEAM1");
-			team.setName("TEAM_NAME1");
-
 			Member member1 = new Member();
 			Member member2 = new Member();
 			
@@ -37,14 +31,23 @@ public class SpringDemoJpaApplication {
 			
 			member2.setId("TEST2");
 			member2.setUsername("USER2");
+			
+			memberRepository.save(member1);
+			memberRepository.save(member2);
 
-			teamRepository.save(team);
+			Team team = new Team();
+			team.setId("TEAM1");
+			team.setName("TEAM_NAME1");
 			
 			team.addMember(member1);
 			team.addMember(member2);
 			
-			memberRepository.save(member1);
-			memberRepository.save(member2);
+			teamRepository.save(team);
+			
+			//*** team을 저장하였는데, member1, member2에는 team 정보가 업데이트 되지 않음!!
+			//*** team은 연관관계의 주인이 아니기 때문에 저장되지 않는다.
+			
+
 		};
 	}
 	
