@@ -23,6 +23,12 @@ public class SpringDemoJpaApplication {
 		
 		
 		return args -> {
+
+
+			Team team = new Team();
+			team.setId("TEAM1");
+			team.setName("TEAM_NAME1");
+
 			Member member1 = new Member();
 			Member member2 = new Member();
 			
@@ -31,18 +37,14 @@ public class SpringDemoJpaApplication {
 			
 			member2.setId("TEST2");
 			member2.setUsername("USER2");
+
+			teamRepository.save(team);
 			
-			Team team = new Team();
-			team.setId("TEAM1");
-			team.setName("TEAM_NAME1");
 			team.addMember(member1);
 			team.addMember(member2);
-
+			
 			memberRepository.save(member1);
 			memberRepository.save(member2);
-			
-			teamRepository.save(team);
-						
 		};
 	}
 	
